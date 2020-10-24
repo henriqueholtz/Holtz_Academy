@@ -41,8 +41,8 @@ namespace Holtz_Academy.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int code)
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] int code)
         {
             await _teatcherService.RemoveAsync(code);
             return Ok();

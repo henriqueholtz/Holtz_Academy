@@ -1,7 +1,9 @@
 ﻿using Holtz_Academy.API.Data;
 using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Holtz_Academy.API.Controllers
 {
@@ -9,41 +11,42 @@ namespace Holtz_Academy.API.Controllers
     [Route("api/students")]
     public class StudentsController : ControllerBase
     {
-        private readonly Context _context;
-        public StudentsController(Context context)
+        private readonly StudentService _studentService;
+        public StudentsController(StudentService studentService)
         {
-            _context = context;
+            _studentService = studentService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_context.Students.ToList());
+            return Ok(await _studentService.FindAllAsync()); ;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{code}")]
+        public async Task<IActionResult> Index(int code)
         {
-            return Ok(_context.Students.FirstOrDefault(x => x.StudentCode == id));
+            return Ok(await _studentService.FindByCodeAsync(code));
         }
 
         [HttpPost]
-        public IActionResult Insert([FromBody]Student student)
+        public async Task<IActionResult> Insert([FromBody]Student student)
         {
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            await _studentService.InsertAsync(student);
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(Student student)
         {
+            await _studentService.UpdateAsync(student);
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{code}")]
+        public async Task<IActionResult> Delete(int code)
         {
+            await _studentService.RemoveAsync(code);
             return Ok();
         }
     }

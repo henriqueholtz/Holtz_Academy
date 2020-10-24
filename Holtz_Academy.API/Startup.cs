@@ -49,6 +49,7 @@ namespace Holtz_Academy.API
 
             //Inject Dependencies
             services.AddScoped<TeatcherService>();
+            services.AddScoped<StudentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
