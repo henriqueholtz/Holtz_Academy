@@ -1,6 +1,5 @@
 ﻿using Holtz_Academy.API.Data;
 using Holtz_Academy.API.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,29 +8,26 @@ using System.Threading.Tasks;
 
 namespace Holtz_Academy.API.Services
 {
-    public class TeatcherService
+    public class BranchService
     {
         private readonly Context _context;
-        public TeatcherService(Context context)
+        public BranchService(Context context)
         {
             _context = context;
         }
-
-        public async Task<List<Teatcher>> FindAllAsync()
+        public async Task<List<Branch>> FindAllAsync()
         {
-            return await _context.Teatchers.ToListAsync();
+            return await _context.Branches.ToListAsync();
         }
-
-        public async Task<Teatcher> FindByCodeAsync(int code)
+        public async Task<Branch> FindByCodeAsync(int code)
         {
-            return await _context.Teatchers.FirstOrDefaultAsync(x => x.TeatcherCode == code);
+            return await _context.Branches.FirstOrDefaultAsync(x => x.BranchCode == code);
         }
-
-        public async Task InsertAsync(Teatcher teatcher)
+        public async Task InsertAsync(Branch branch)
         {
             try
             {
-                _context.Teatchers.Add(teatcher);
+                _context.Branches.Add(branch);
                 await _context.SaveChangesAsync();
             }
             catch
@@ -39,11 +35,11 @@ namespace Holtz_Academy.API.Services
 
             }
         }
-        public async Task UpdateAsync(Teatcher teatcher)
+        public async Task UpdateAsync(Branch branch)
         {
             try
             {
-                _context.Teatchers.Update(teatcher);
+                _context.Branches.Update(branch);
                 await _context.SaveChangesAsync();
             }
             catch
@@ -53,14 +49,10 @@ namespace Holtz_Academy.API.Services
         }
         public async Task RemoveAsync(int code)
         {
-            var teatcher = await FindByCodeAsync(code);
-            if (teatcher == null)
-            {
-                
-            }
+            Branch branch = await FindByCodeAsync(code);
             try
             {
-                _context.Teatchers.Remove(teatcher);
+                _context.Branches.Remove(branch);
                 await _context.SaveChangesAsync();
             }
             catch

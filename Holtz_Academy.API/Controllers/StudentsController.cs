@@ -2,6 +2,7 @@
 using Holtz_Academy.API.Entities;
 using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +19,15 @@ namespace Holtz_Academy.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<Student>> FindAll()
         {
-            return Ok(await _studentService.FindAllAsync()); ;
+            return await _studentService.FindAllAsync();
         }
 
         [HttpGet("{code}")]
-        public async Task<IActionResult> Index(int code)
+        public async Task<Student> FindByCode(int code)
         {
-            return Ok(await _studentService.FindByCodeAsync(code));
+            return await _studentService.FindByCodeAsync(code);
         }
 
         [HttpPost]
@@ -37,7 +38,7 @@ namespace Holtz_Academy.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit(Student student)
+        public async Task<IActionResult> Update([FromBody]Student student)
         {
             await _studentService.UpdateAsync(student);
             return Ok();

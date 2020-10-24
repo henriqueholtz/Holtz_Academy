@@ -2,6 +2,7 @@
 using Holtz_Academy.API.Entities;
 using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,14 +19,14 @@ namespace Holtz_Academy.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<List<Teatcher>> FindAll()
         {
-            return Ok(_teatcherService.FindAllAsync());
+            return await _teatcherService.FindAllAsync();
         }
         [HttpGet("{code}")]
-        public IActionResult Get(int code)
+        public async Task<Teatcher> FindByCode(int code)
         {
-            return Ok(_teatcherService.FindByCodeAsync(code));
+            return await _teatcherService.FindByCodeAsync(code);
         }
 
         [HttpPost]
@@ -36,8 +37,9 @@ namespace Holtz_Academy.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(int code)
+        public async Task<IActionResult> Update([FromBody] Teatcher teatcher)
         {
+            await _teatcherService.UpdateAsync(teatcher);
             return Ok();
         }
 

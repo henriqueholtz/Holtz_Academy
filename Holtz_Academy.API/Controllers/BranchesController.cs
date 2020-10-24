@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Holtz_Academy.API.Data;
+using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,39 +14,42 @@ namespace Holtz_Academy.API.Controllers
     [ApiController]
     public class BranchesController : ControllerBase
     {
-        private readonly Context _context;
-        public BranchesController(Context context)
+        private readonly BranchService _branchService;
+        public BranchesController(BranchService branchService)
         {
-            _context = context;
+            _branchService = branchService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<List<Branch>> FindAll()
         {
-            return Ok(_context.Branches.ToList());
+            return await _branchService.FindAllAsync();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{code}")]
+        public async Task<Branch> FindByCode(int code)
         {
-            return Ok(_context.Branches.FirstOrDefault(x => x.BranchCode == id));
+            return await _branchService.FindByCodeAsync(code);
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Post(int id)
+        [HttpPost]
+        public async Task<IActionResult> Insert([FromBody] Branch branch)
         {
+            await _branchService.InsertAsync(branch);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody]Branch branch)
         {
+            await _branchService.UpdateAsync(branch);
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{code}")]
+        public async Task<IActionResult> Delete(int code)
         {
+            await _branchService.RemoveAsync(code);
             return Ok();
         }
     }
