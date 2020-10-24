@@ -32,6 +32,8 @@ namespace Holtz_Academy.API.Entities
         public string TeatcherCityName { get; private set; } //Nome da Cidade
 
 
+        public int BranchCode { get; private set; }
+        public Branch Branch { get; private set; }
         public List<Student> Students { get; private set; }
     }
 }

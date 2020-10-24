@@ -17,20 +17,20 @@ namespace Holtz_Academy.API.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult Post()
+        [HttpPost("{id}")]
+        public IActionResult Post(int id)
         {
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Put()
+        [HttpPut("{id}")]
+        public IActionResult Put(int id)
         {
             return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             return Ok();
         }
