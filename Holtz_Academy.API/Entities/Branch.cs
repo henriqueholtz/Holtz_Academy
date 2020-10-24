@@ -8,12 +8,30 @@ namespace Holtz_Academy.API.Entities
 {
     public class Branch //Filial - Ramo
     {
-        public int BranchCode { get; set; }
-        public string BraReason { get; set; } //Razão
-        public Status_ActiveInactive BranchStatus { get; set; }
-        public string BranchStreet { get; set; } //Rua
-        public string BranchNeighborhood { get; set; } //Bairro
-        public int BranchNumber { get; set; } //Número
-        public int BranchCityName { get; set; } //Nome da Cidade
+        protected Branch()
+        {
+        }
+        public Branch(string branchReason, string branchStreet, string branchNeighborhood, int branchNumber, string branchCityName )
+        {
+            BranchReason = branchReason;
+            BranchStatus = Status_ActiveInactive.ACTIVE;
+            BranchStreet = branchStreet;
+            BranchNeighborhood = branchNeighborhood;
+            BranchNumber = branchNumber;
+            BranchCityName = branchCityName;
+            Teatchers = new List<Teatcher>();
+            Students = new List<Student>();
+        }
+        public int BranchCode { get; private set; }
+        public string BranchReason { get; private set; } //Razão
+        public Status_ActiveInactive BranchStatus { get; private set; }
+        public string BranchStreet { get; private set; } //Rua
+        public string BranchNeighborhood { get; private set; } //Bairro
+        public int BranchNumber { get; private set; } //Número
+        public string BranchCityName { get; private set; } //Nome da Cidade
+
+
+        public List<Teatcher> Teatchers { get; private set; }
+        public List<Student> Students { get; private set; }
     }
 }
