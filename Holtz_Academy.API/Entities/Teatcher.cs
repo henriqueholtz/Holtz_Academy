@@ -11,7 +11,7 @@ namespace Holtz_Academy.API.Entities
         protected Teatcher()
         {
         }
-        public Teatcher(string teatcherReason, DateTime teatcherBirthDate, string teatcherStreet, string teatcherNeighborhood, int teatcherNumber, string teatcherCityName)
+        public Teatcher(string teatcherReason, DateTime teatcherBirthDate, string teatcherStreet, string teatcherNeighborhood, int teatcherNumber, string teatcherCityName, int branchCode)
         {
             TeatcherReason = teatcherReason;
             TeatcherStatus = Status_ActiveInactive.ACTIVE;
@@ -21,6 +21,7 @@ namespace Holtz_Academy.API.Entities
             TeatcherNumber = teatcherNumber;
             TeatcherCityName = teatcherCityName;
             Students = new List<Student>();
+            BranchCode = branchCode;
         }
         public int TeatcherCode { get; set; }
         public string TeatcherReason { get; set; } //Razão

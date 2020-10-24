@@ -48,11 +48,12 @@ namespace Holtz_Academy.API
             services.AddControllersWithViews();
 
             //Inject Dependencies
+            services.AddScoped<SeedingService>();
             services.AddScoped<TeatcherService>();
             services.AddScoped<StudentService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,SeedingService seed)
         {
             //Swagger
             app.UseSwagger();
@@ -64,6 +65,7 @@ namespace Holtz_Academy.API
             if (env.IsDevelopment()) //Desenvolvimento
             {
                 app.UseDeveloperExceptionPage();
+                seed.Seed();
             }
             else
             {
