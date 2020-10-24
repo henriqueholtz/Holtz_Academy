@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Holtz_Academy.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201024170315_002")]
-    partial class _002
+    [Migration("20201024173629_001")]
+    partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

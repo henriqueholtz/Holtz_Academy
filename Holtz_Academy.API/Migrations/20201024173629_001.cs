@@ -13,7 +13,7 @@ namespace Holtz_Academy.API.Migrations
                 {
                     EquipamentCode = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EquipamentReason = table.Column<string>(nullable: true),
+                    EquipamentName = table.Column<string>(nullable: true),
                     EquipamentStatus = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
