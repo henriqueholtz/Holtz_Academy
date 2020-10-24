@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Holtz_Academy.API.Data;
+using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Holtz_Academy.API.Controllers
 {
@@ -6,32 +11,40 @@ namespace Holtz_Academy.API.Controllers
     [ApiController]
     public class TeatchersController : ControllerBase
     {
+        private readonly TeatcherService _teatcherService;
+        public TeatchersController(TeatcherService service)
+        {
+            _teatcherService = service;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(_teatcherService.FindAllAsync());
         }
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{code}")]
+        public IActionResult Get(int code)
         {
+            return Ok(_teatcherService.FindByCodeAsync(code));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Insert([FromBody] Teatcher teatcher)
+        {
+            await _teatcherService.InsertAsync(teatcher);
             return Ok();
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Post(int id)
-        {
-            return Ok();
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        [HttpPut]
+        public IActionResult Edit(int code)
         {
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int code)
         {
+            await _teatcherService.RemoveAsync(code);
             return Ok();
         }
     }

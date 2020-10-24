@@ -1,4 +1,5 @@
 ﻿using Holtz_Academy.API.Data;
+using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,6 +47,8 @@ namespace Holtz_Academy.API
 
             services.AddControllersWithViews();
 
+            //Inject Dependencies
+            services.AddScoped<TeatcherService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

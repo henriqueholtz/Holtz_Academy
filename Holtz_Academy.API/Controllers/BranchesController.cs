@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Holtz_Academy.API.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,16 +12,22 @@ namespace Holtz_Academy.API.Controllers
     [ApiController]
     public class BranchesController : ControllerBase
     {
+        private readonly Context _context;
+        public BranchesController(Context context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(_context.Branches.ToList());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok();
+            return Ok(_context.Branches.FirstOrDefault(x => x.BranchCode == id));
         }
 
         [HttpPost("{id}")]
