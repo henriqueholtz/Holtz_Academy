@@ -39,6 +39,10 @@ namespace Holtz_Academy.API.Entities.Configuration
             builder.Property(x => x.TeatcherCode)
                 .HasColumnType(Tipo.CODE)
                 .ValueGeneratedNever(); //Remove Identity
+
+            builder.Property(x => x.StudentStatus)
+                .HasColumnType(Tipo.STATUS)
+                .ValueGeneratedNever();
         }
     }
 }
