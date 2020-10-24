@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Holtz_Academy.API
 {
@@ -17,6 +18,16 @@ namespace Holtz_Academy.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //Swagger
+            services.AddSwaggerGen(c =>
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "API Holtz_Academy",
+                    Version = "v1",
+                    Description = "Mapper for API of Holtz_Academy"
+                })
+            );
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential 
@@ -32,6 +43,13 @@ namespace Holtz_Academy.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AwesomeGym API");
+            });
+
             if (env.IsDevelopment()) //Desenvolvimento
             {
                 app.UseDeveloperExceptionPage();
