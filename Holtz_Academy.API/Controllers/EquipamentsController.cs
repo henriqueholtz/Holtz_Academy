@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Holtz_Academy.API.Data;
+using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,39 +14,42 @@ namespace Holtz_Academy.API.Controllers
     [ApiController]
     public class EquipamentsController : ControllerBase
     {
-        private readonly Context _context;
-        public EquipamentsController(Context context)
+        private readonly EquipamentService _equipamentService;
+        public EquipamentsController(EquipamentService equipamentService)
         {
-            _context = context;
+            _equipamentService = equipamentService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<List<Equipament>> FindAll()
         {
-            return Ok(_context.Equipaments.ToList());
+            return await _equipamentService.FindAllAsync();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{code}")]
+        public async Task<Equipament> FindByCode([FromBody]int code)
         {
-            return Ok(_context.Equipaments.FirstOrDefault(x => x.EquipamentCode == id));
+            return await _equipamentService.FindByCodeAsync(code);
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Post(int id)
+        [HttpPost]
+        public async Task<IActionResult> Insert([FromBody]Equipament equipament)
         {
+            await _equipamentService.InsertAsync(equipament);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Equipament equipament)
         {
+            await _equipamentService.UpdateAsync(equipament);
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{code}")]
+        public async Task<IActionResult> Delete(int code)
         {
+            await _equipamentService.RemoveAsync(code);
             return Ok();
         }
     }
