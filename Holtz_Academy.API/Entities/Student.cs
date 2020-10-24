@@ -36,6 +36,6 @@ namespace Holtz_Academy.API.Entities
         public virtual Teatcher Teatcher { get; private set; }
 
         public int BranchCode { get; private set; }
-        public Branch Branch { get; private set; }
+        public virtual Branch Branch { get; private set; }
     }
 }

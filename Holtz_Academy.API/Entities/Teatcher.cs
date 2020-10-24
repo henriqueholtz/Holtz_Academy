@@ -34,7 +34,7 @@ namespace Holtz_Academy.API.Entities
 
 
         public int BranchCode { get; private set; }
-        public Branch Branch { get; private set; }
-        public List<Student> Students { get; private set; }
+        public virtual Branch Branch { get; private set; }
+        public virtual List<Student> Students { get; private set; }
     }
 }
