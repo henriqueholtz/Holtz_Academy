@@ -23,19 +23,19 @@ namespace Holtz_Academy.API.Entities
             Students = new List<Student>();
         }
         public int BranchCode { get; private set; }
-        public string BranchReason { get; private set; } //Razão
-        public Status_ActiveInactive BranchStatus { get; private set; }
-        public string BranchStreet { get; private set; } //Rua
-        public string BranchNeighborhood { get; private set; } //Bairro
-        public int BranchNumber { get; private set; } //Número
-        public string BranchCityName { get; private set; } //Nome da Cidade
-        public int StudentCode { get; private set; }
-        public virtual Student Student { get; private set; }
-        public int TeatcherCode { get; private set; }
-        public virtual Teatcher Teatcher { get; private set; }
+        public string BranchReason { get; private set; } = null!; //Razão
+        public Status_ActiveInactive? BranchStatus { get; private set; }
+        public string BranchStreet { get; private set; } = null!; //Rua
+        public string BranchNeighborhood { get; private set; } = null!; //Bairro
+        public int? BranchNumber { get; private set; } //Número
+        public string BranchCityName { get; private set; } = null!; //Nome da Cidade
+        //public int? StudentStudentCode { get; private set; }
+        //public virtual Student Student { get; set; }
+        //public int? TeatcherTeatcherCode { get; private set; }
+        //public virtual Teatcher Teatcher { get; private set; }
 
 
-        public virtual List<Teatcher> Teatchers { get; private set; }
-        public virtual List<Student> Students { get; private set; }
+        public virtual ICollection<Teatcher> Teatchers { get; private set; }
+        public virtual ICollection<Student> Students { get; private set; }
     }
 }

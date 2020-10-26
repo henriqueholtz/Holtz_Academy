@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Holtz_Academy.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201024173629_001")]
+    [Migration("20201026095150_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,176 +25,152 @@ namespace Holtz_Academy.API.Migrations
                 {
                     b.Property<int>("BranchCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("INT")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BranchCityName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("BranchNeighborhood")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
-                    b.Property<int>("BranchNumber")
+                    b.Property<int?>("BranchNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("BranchReason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(75)");
 
-                    b.Property<byte>("BranchStatus")
-                        .HasColumnType("tinyint");
+                    b.Property<byte?>("BranchStatus")
+                        .HasColumnType("TINYINT");
 
                     b.Property<string>("BranchStreet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentCode")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentCode1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeatcherCode")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeatcherCode1")
-                        .HasColumnType("int");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("BranchCode");
 
-                    b.HasIndex("StudentCode1");
-
-                    b.HasIndex("TeatcherCode1");
-
-                    b.ToTable("Branches");
+                    b.ToTable("Branch");
                 });
 
             modelBuilder.Entity("Holtz_Academy.API.Entities.Equipament", b =>
                 {
                     b.Property<int>("EquipamentCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("INT")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EquipamentName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(75)");
 
-                    b.Property<byte>("EquipamentStatus")
-                        .HasColumnType("tinyint");
+                    b.Property<byte?>("EquipamentStatus")
+                        .HasColumnType("TINYINT");
 
                     b.HasKey("EquipamentCode");
 
-                    b.ToTable("Equipaments");
+                    b.ToTable("Equipament");
                 });
 
             modelBuilder.Entity("Holtz_Academy.API.Entities.Student", b =>
                 {
                     b.Property<int>("StudentCode")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BranchCode")
-                        .HasColumnType("int");
+                    b.Property<int?>("BranchBranchCode")
+                        .HasColumnName("BranchCode")
+                        .HasColumnType("INT");
 
-                    b.Property<DateTime>("StudentBirthDate")
+                    b.Property<DateTime?>("StudentBirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("StudentCityName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("StudentNeighborhood")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
-                    b.Property<int>("StudentNumber")
+                    b.Property<int?>("StudentNumber")
                         .HasColumnType("int");
 
-                    b.Property<byte>("StudentStatus")
-                        .HasColumnType("tinyint");
+                    b.Property<byte?>("StudentStatus")
+                        .HasColumnType("TINYINT");
 
                     b.Property<string>("StudentStreet")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("StudentaReason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(100)");
 
-                    b.Property<int>("TeatcherCode")
-                        .HasColumnType("int");
+                    b.Property<int?>("TeatcherTeatcherCode")
+                        .HasColumnName("TeatcherCode")
+                        .HasColumnType("INT");
 
                     b.HasKey("StudentCode");
 
-                    b.HasIndex("TeatcherCode");
+                    b.HasIndex("BranchBranchCode");
 
-                    b.ToTable("Students");
+                    b.HasIndex("TeatcherTeatcherCode");
+
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("Holtz_Academy.API.Entities.Teatcher", b =>
                 {
                     b.Property<int>("TeatcherCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("INT")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BranchCode")
+                    b.Property<int?>("BranchCode")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TeatcherBirthDate")
+                    b.Property<int?>("BranchCode1")
+                        .HasColumnType("INT");
+
+                    b.Property<DateTime?>("TeatcherBirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TeatcherCityName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("TeatcherNeighborhood")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
-                    b.Property<int>("TeatcherNumber")
+                    b.Property<int?>("TeatcherNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("TeatcherReason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(75)");
 
-                    b.Property<byte>("TeatcherStatus")
-                        .HasColumnType("tinyint");
+                    b.Property<byte?>("TeatcherStatus")
+                        .HasColumnType("TINYINT");
 
                     b.Property<string>("TeatcherStreet")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("TeatcherCode");
 
-                    b.HasIndex("BranchCode");
+                    b.HasIndex("BranchCode1");
 
-                    b.ToTable("Teatchers");
-                });
-
-            modelBuilder.Entity("Holtz_Academy.API.Entities.Branch", b =>
-                {
-                    b.HasOne("Holtz_Academy.API.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentCode1");
-
-                    b.HasOne("Holtz_Academy.API.Entities.Teatcher", "Teatcher")
-                        .WithMany()
-                        .HasForeignKey("TeatcherCode1");
+                    b.ToTable("Teatcher");
                 });
 
             modelBuilder.Entity("Holtz_Academy.API.Entities.Student", b =>
                 {
                     b.HasOne("Holtz_Academy.API.Entities.Branch", "Branch")
                         .WithMany("Students")
-                        .HasForeignKey("StudentCode")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("BranchBranchCode");
 
                     b.HasOne("Holtz_Academy.API.Entities.Teatcher", "Teatcher")
                         .WithMany("Students")
-                        .HasForeignKey("TeatcherCode")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("TeatcherTeatcherCode");
                 });
 
             modelBuilder.Entity("Holtz_Academy.API.Entities.Teatcher", b =>
                 {
                     b.HasOne("Holtz_Academy.API.Entities.Branch", "Branch")
                         .WithMany("Teatchers")
-                        .HasForeignKey("BranchCode")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("BranchCode1");
                 });
 #pragma warning restore 612, 618
         }

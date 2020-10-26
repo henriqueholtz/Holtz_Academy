@@ -18,7 +18,7 @@ namespace Holtz_Academy.API.Entities
         }
 
         public int EquipamentCode { get; private set; }
-        public string EquipamentName { get; private set; } //Name
-        public Status_Equipament EquipamentStatus { get; private set; }
+        public string EquipamentName { get; private set; } = null!; //Name
+        public Status_Equipament? EquipamentStatus { get; private set; }
     }
 }

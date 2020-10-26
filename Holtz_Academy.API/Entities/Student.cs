@@ -11,7 +11,7 @@ namespace Holtz_Academy.API.Entities
         protected Student()
         {
         }
-        public Student(string studentReason, DateTime studentBirthDate, string studentStreet, string studentNeighborhood, int studentNumber, string studentCityName, int teatcherCode)
+        public Student(string studentReason, DateTime studentBirthDate, string studentStreet, string studentNeighborhood, int studentNumber, string studentCityName, int teatcherCode, int branchCode)
         {
             StudentaReason = studentReason;
             StudentStatus = Status_ActiveInactive.ACTIVE;
@@ -20,22 +20,23 @@ namespace Holtz_Academy.API.Entities
             StudentNeighborhood = studentNeighborhood;
             StudentNumber = studentNumber;
             StudentCityName = studentCityName;
-            TeatcherCode = teatcherCode;
+            TeatcherTeatcherCode = teatcherCode;
+            BranchBranchCode = BranchBranchCode;
         }
         public int StudentCode { get; private set; }
-        public string StudentaReason { get; private set; } //Razão
-        public Status_ActiveInactive StudentStatus { get; private set; }
-        public DateTime StudentBirthDate { get; private set; }
-        public string StudentStreet { get; private set; } //Rua
-        public string StudentNeighborhood { get; private set; } //Bairro
-        public int StudentNumber { get; private set; } //Número
-        public string StudentCityName { get; private set; } //Nome da Cidade
+        public string StudentaReason { get; private set; } = null!; //Razão
+        public Status_ActiveInactive? StudentStatus { get; private set; }
+        public DateTime? StudentBirthDate { get; private set; }
+        public string StudentStreet { get; private set; } = null!; //Rua
+        public string StudentNeighborhood { get; private set; } = null!; //Bairro
+        public int? StudentNumber { get; private set; } //Número
+        public string StudentCityName { get; private set; } = null!; //Nome da Cidade
 
 
-        public int TeatcherCode { get; private set; }
+        public int? TeatcherTeatcherCode { get; private set; }
         public virtual Teatcher Teatcher { get; private set; }
 
-        public int BranchCode { get; private set; }
+        public int? BranchBranchCode { get; private set; }
         public virtual Branch Branch { get; private set; }
     }
 }

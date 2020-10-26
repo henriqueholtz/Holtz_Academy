@@ -51,6 +51,8 @@ namespace Holtz_Academy.API
             services.AddScoped<SeedingService>();
             services.AddScoped<TeatcherService>();
             services.AddScoped<StudentService>();
+            services.AddScoped<BranchService>();
+            services.AddScoped<EquipamentService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,SeedingService seed)

@@ -21,20 +21,20 @@ namespace Holtz_Academy.API.Entities
             TeatcherNumber = teatcherNumber;
             TeatcherCityName = teatcherCityName;
             Students = new List<Student>();
-            BranchCode = branchCode;
+            BranchBranchCode = branchCode;
         }
         public int TeatcherCode { get; set; }
-        public string TeatcherReason { get; set; } //Razão
-        public Status_ActiveInactive TeatcherStatus { get; set; }
-        public DateTime TeatcherBirthDate { get; private set; }
-        public string TeatcherStreet { get; private set; } //Rua
-        public string TeatcherNeighborhood { get; private set; } //Bairro
-        public int TeatcherNumber { get; private set; } //Número
-        public string TeatcherCityName { get; private set; } //Nome da Cidade
+        public string TeatcherReason { get; set; } = null!; //Razão
+        public Status_ActiveInactive? TeatcherStatus { get; set; }
+        public DateTime? TeatcherBirthDate { get; private set; }
+        public string TeatcherStreet { get; private set; } = null!; //Rua
+        public string TeatcherNeighborhood { get; private set; } = null!; //Bairro
+        public int? TeatcherNumber { get; private set; } //Número
+        public string TeatcherCityName { get; private set; } = null!; //Nome da Cidade
 
 
-        public int BranchCode { get; private set; }
+        public int? BranchBranchCode { get; private set; }
         public virtual Branch Branch { get; private set; }
-        public virtual List<Student> Students { get; private set; }
+        public virtual ICollection<Student> Students { get; private set; }
     }
 }
