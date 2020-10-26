@@ -1,5 +1,6 @@
 ﻿using Holtz_Academy.API.Data;
 using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,38 +35,42 @@ namespace Holtz_Academy.API.Services
                 _context.Teatchers.Add(teatcher);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
         public async Task UpdateAsync(Teatcher teatcher)
         {
+            if (!await _context.Teatchers.AnyAsync(x => x.TeatcherCode == teatcher.TeatcherCode))
+            {
+                throw new NotFoundException("Don't have Teatcher with this code");
+            }
             try
             {
                 _context.Teatchers.Update(teatcher);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
         public async Task RemoveAsync(int code)
         {
-            var teatcher = await FindByCodeAsync(code);
+            Teatcher teatcher = await FindByCodeAsync(code);
             if (teatcher == null)
             {
-                
+                throw new NotFoundException("Don't have Teatcher with this code");
             }
             try
             {
                 _context.Teatchers.Remove(teatcher);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
     }

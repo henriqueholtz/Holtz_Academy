@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Holtz_Academy.API.Data;
 using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Entities.InputModels;
 using Holtz_Academy.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +17,11 @@ namespace Holtz_Academy.API.Controllers
     public class BranchesController : ControllerBase
     {
         private readonly BranchService _branchService;
-        public BranchesController(BranchService branchService)
+        private readonly IMapper _mapper;
+        public BranchesController(BranchService branchService, IMapper mapper)
         {
             _branchService = branchService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,10 +37,11 @@ namespace Holtz_Academy.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert([FromBody] Branch branch)
+        public async Task<IActionResult> Insert([FromBody] BranchInputModel branch)
         {
-            await _branchService.InsertAsync(branch);
+            await _branchService.InsertAsync(_mapper.Map<BranchInputModel, Branch>(branch));
             return Ok();
+            //return CreatedAtAction(nameof(FindByCode), branch, new { code = branch.BranchCode }); // return branch created
         }
 
         [HttpPut]

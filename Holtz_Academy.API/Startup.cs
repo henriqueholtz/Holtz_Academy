@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
 
 namespace Holtz_Academy.API
 {
@@ -53,6 +54,9 @@ namespace Holtz_Academy.API
             services.AddScoped<StudentService>();
             services.AddScoped<BranchService>();
             services.AddScoped<EquipamentService>();
+
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,SeedingService seed)

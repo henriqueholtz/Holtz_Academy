@@ -1,5 +1,6 @@
 ﻿using Holtz_Academy.API.Data;
 using Holtz_Academy.API.Entities;
+using Holtz_Academy.API.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,34 +33,42 @@ namespace Holtz_Academy.API.Services
                 _context.Students.Add(student);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
         public async Task UpdateAsync(Student student)
         {
+            if (!await _context.Students.AnyAsync(x => x.StudentCode == student.StudentCode))
+            {
+                throw new NotFoundException("Don't have Student with this code");
+            }
             try
             {
                 _context.Students.Update(student);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
         public async Task RemoveAsync(int code)
         {
             Student student = await FindByCodeAsync(code);
+            if (student == null)
+            {
+                throw new NotFoundException("Don't have Student with this code");
+            }
             try
             {
                 _context.Students.Remove(student);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateException e) //comes from db
             {
-
+                throw new IntegrityException(e.Message);
             }
         }
     }
