@@ -11,14 +11,18 @@ namespace Holtz_Academy.API.Entities
         protected Equipament()
         {
         }
-        public Equipament(string name, Status_Equipament status = Status_Equipament.ACTIVE)
+        public Equipament(string name, Status_Equipament status = Status_Equipament.ACTIVE, int branchCode = 0)
         {
             EquipamentName = name;
             EquipamentStatus = status;
+            BranchBranchCode = branchCode;
         }
 
         public int EquipamentCode { get; private set; }
         public string EquipamentName { get; private set; } = null!; //Name
         public Status_Equipament? EquipamentStatus { get; private set; }
+
+        public int? BranchBranchCode { get; private set; }
+        public virtual Branch Branch { get; private set; }
     }
 }

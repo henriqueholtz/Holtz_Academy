@@ -37,5 +37,6 @@ namespace Holtz_Academy.API.Entities
 
         public virtual ICollection<Teatcher> Teatchers { get; private set; }
         public virtual ICollection<Student> Students { get; private set; }
+        public virtual ICollection<Equipament> Equipaments { get; private set; }
     }
 }

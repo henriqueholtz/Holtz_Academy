@@ -27,6 +27,11 @@ namespace Holtz_Academy.API.Entities.Configuration
             builder.Property(x => x.EquipamentName)
                 .HasColumnType(Tipo.VARCHAR075)
                 .ValueGeneratedNever(); //Remove Identity
+
+            builder.Property(x => x.BranchBranchCode)
+                .HasColumnName("BranchCode")
+                .HasColumnType(Tipo.CODE)
+                .ValueGeneratedNever(); //Remove Identity
         }
     }
 }

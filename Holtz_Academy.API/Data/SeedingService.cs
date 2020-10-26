@@ -66,10 +66,10 @@ namespace Holtz_Academy.API.Data
 
             if (!_context.Equipaments.Any())
             {
-                Equipament e1 = new Equipament("EQUIPAMENT 1", Status_Equipament.ACTIVE);
-                Equipament e2 = new Equipament("EQUIPAMENT 1", Status_Equipament.BROKE);
-                Equipament e3 = new Equipament("EQUIPAMENT 1", Status_Equipament.INACTIVE);
-                Equipament e4 = new Equipament("EQUIPAMENT 1", Status_Equipament.MANUTENTION);
+                Equipament e1 = new Equipament("EQUIPAMENT 1", Status_Equipament.ACTIVE, 1);
+                Equipament e2 = new Equipament("EQUIPAMENT 1", Status_Equipament.BROKE, 1);
+                Equipament e3 = new Equipament("EQUIPAMENT 1", Status_Equipament.INACTIVE, 1);
+                Equipament e4 = new Equipament("EQUIPAMENT 1", Status_Equipament.MANUTENTION, 1);
                 _context.Equipaments.AddRange(e1, e2, e3, e4);
             }
 
